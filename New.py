@@ -117,8 +117,8 @@ def get_table_download_link(df2):
     return href
     
 def main():
-    img = Image.open("student.jpeg")
-    st.image(img,width=None)
+    #img = Image.open("student.jpeg")
+    #st.image(img,width=None)
     #img2 = Image.open("images.jpg")
     
 
