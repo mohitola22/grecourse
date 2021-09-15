@@ -119,13 +119,13 @@ def get_table_download_link(df2):
 def main():
     img = Image.open("student.jpeg")
     st.image(img,width=None)
-    img2 = Image.open("images.jpg")
+    #img2 = Image.open("images.jpg")
     
 
-    st.image(img2,width=None)
+    #st.image(img2,width=None)
     menu = ["Home","Login","SignUp","College Predictor","Recommend","About"]
     choice = st.sidebar.selectbox("Menu",menu)
-    df = load_data("C:/Users/mohit.verma/Desktop/New folder (3)/data/udemy.csv")
+    df = load_data("udemy.csv")
     df.drop_duplicates(subset ="Title",keep= 'first', inplace = True)
     #print(pd.unique(df['Title']))
     #print(list(df.iloc[0]))
