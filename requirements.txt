@@ -2,3 +2,4 @@ streamlit==0.85.1
 sqlite==3.32.3
 pandas==1.0.5
 sklearn==0.23.1
+time
