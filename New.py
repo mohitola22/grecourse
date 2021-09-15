@@ -5,25 +5,25 @@ import pandas as pd
 import time  
 from PIL import Image
 timestr=time.strftime("%Y/%m/%d-%H:%M:%S")
-import sqlite3
-conn=sqlite3.connect('data.db')
-c=conn.cursor()
+#import sqlite3
+#conn=sqlite3.connect('data.db')
+#c=conn.cursor()
 
-def create_usertable():
-    c.execute('create table if not exists userstable(username TEXT,password TEXT)')
+#def create_usertable():
+#    c.execute('create table if not exists userstable(username TEXT,password TEXT)')
     
-def add_userdata(username,password):
-    c.execute('insert into userstable(username,password) values(?,?)',(username,password))
-    conn.commit()
+#def add_userdata(username,password):
+#    c.execute('insert into userstable(username,password) values(?,?)',(username,password))
+#    conn.commit()
 
-def login_user(username,password):
-    c.execute('select * from userstable where username=? and password=?',(username,password))
-    data=c.fetchall()
-    return data
-def view_all_users():
-    c.execute('select username,password  from userstable')
-    data=c.fetchall()
-    return data
+#def login_user(username,password):
+#    c.execute('select * from userstable where username=? and password=?',(username,password))
+#    data=c.fetchall()
+#    return data
+#def view_all_users():
+#    c.execute('select username,password  from userstable')
+#    data=c.fetchall()
+#    return data
 # Load EDA
 import pandas as pd 
 from sklearn.feature_extraction.text import CountVectorizer
@@ -123,7 +123,7 @@ def main():
     
 
     #st.image(img2,width=None)
-    menu = ["Home","Login","SignUp","College Predictor","Recommend","About"]
+    menu = ["Course Recommendation","College Predictor","About"]
     choice = st.sidebar.selectbox("Menu",menu)
     df = load_data("udemy.csv")
     df.drop_duplicates(subset ="Title",keep= 'first', inplace = True)
@@ -199,39 +199,9 @@ text-align: center;
         st.dataframe(df2)
         st.markdown(get_table_download_link(df2), unsafe_allow_html=True)
         st.markdown('<iframe width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiMzM2M2IyN2QtMWU5Ny00OWRlLTlhM2QtNTFmN2UwOTg1OWU2IiwidCI6IjdhNzQ2NzQyLTc5MzEtNGY1ZC04YWYzLWQyYmY2ZmJiM2ExNSIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>',unsafe_allow_html=True)
-    elif(choice=="Login"):
-        st.subheader("Login Section")
-        
-        username=st.sidebar.text_input("User Name")
-        password=st.sidebar.text_input("Password",type='password')
-        if st.sidebar.checkbox("Login"):
-            create_usertable()
-            result=login_user(username, password)
-            if(result):
-                st.success("Logged In as {}".format(username))
-                task=st.selectbox("Task",["Profiles"])
-                if task=="Profiles":
-                    st.subheader("User Profiles")
-                    user_result=view_all_users()
-                    clean_db=pd.DataFrame(user_result,columns=["Username","Password"])
-                    st.dataframe(clean_db)
-            else:
-                st.warning("Incorrect Username/password")
-    elif choice=="SignUp":
-        st.subheader("Create New Account")
-        new_user=st.sidebar.text_input("Username")
-        new_password=st.sidebar.text_input("Password",type='password')
-        if(st.button("SignUp")):
-            create_usertable()
-            add_userdata(new_user, new_password)
-            st.success("You have successfully created a valid account")
-            st.info("Go to login menu to Login")
-    elif choice == "Home":
-        st.title("Course Recommendation App")
-        st.subheader("Home")
-        st.dataframe(df.head(10))
+    
    
-    elif choice == "Recommend":
+    elif choice == "Course Recommendation":
         st.title("Course Recommendation App")
         st.subheader("Recommend Courses")
         search_term = st.text_input("Search")
