@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run New.py
+web: sh setup.sh && streamlit run Course_recommendation.py
